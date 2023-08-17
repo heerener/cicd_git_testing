@@ -1,0 +1,5 @@
+git action:
+  image: python:3.10-buster
+  script:
+    - pip install gitpython
+    - python repo_actions.py
