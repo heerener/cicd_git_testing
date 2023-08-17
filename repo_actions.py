@@ -24,14 +24,20 @@ def commit_and_push():
     except StopIteration:
         print(f"{branch_name} does not exist yet - creating")
         repo.create_head(branch_name)
+        print("Head created")
         new_branch = next(head for head in repo.heads if head.name == branch_name)
+        print(f"New branch: {new_branch}")
         new_branch.checkout()
+        print(f"{new_branch} checked out")
 
+    print("Adding to index")
     repo.index.add("modification.txt")
     author = Actor("Erik", "erik.heeren@epfl.ch")
+    print("Committing")
     repo.index.commit("Committing a change", author=author)
+    print("Pushing")
     result = remote.push(refspec=f"branch_name:branch_name")
-    print(result.summary)
+    print(f"Result: {result.summary}")
 
 
 def main():
