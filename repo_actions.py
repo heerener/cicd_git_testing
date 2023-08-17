@@ -36,7 +36,7 @@ def commit_and_push():
     print("Committing")
     repo.index.commit("Committing a change", author=author)
     print("Pushing")
-    result = remote.push(refspec=f"branch_name:branch_name")
+    result = remote.push(refspec=f"{branch_name}:{branch_name}")
     print(f"Result: {result.summary}")
 
 
