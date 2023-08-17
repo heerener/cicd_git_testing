@@ -35,7 +35,7 @@ def commit_and_push():
     author = Actor("Erik", "erik.heeren@epfl.ch")
     print("Committing")
     repo.index.commit("Committing a change", author=author)
-    print(f"Remotes: {remote.name for remote in repo.remotes}")
+    print(f"Remotes: {(remote.name, [url for url in remote.urls]) for remote in repo.remotes}")
     print("Pushing")
     result = remote.push(refspec=f"{branch_name}:{branch_name}")
     print(f"Result: {result.summary}")
