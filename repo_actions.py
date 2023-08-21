@@ -45,7 +45,6 @@ def commit_and_push(branch_name):
     )
     print("Pushing")
     result = remote.push(refspec=f"{branch_name}:{branch_name}")
-    print(f"Result: {result.summary}")
 
 
 def pull_request(branch_name):
