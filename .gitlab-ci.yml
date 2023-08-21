@@ -4,12 +4,7 @@ git action:
     - pip install gitpython
     - mkdir -p .ssh
     - echo $GITHUB_DEPLOY_KEY | base64 -d > .ssh/deploy
-    - GIT_SSH_COMMAND="ssh -i $(realpath .ssh/deploy)" python repo_actions.py || true
+    - python repo_actions.py || true
     - ls
     - git status
     - git remote -v
-    - echo $HTTP_PROXY
-    - echo $HTTPS_PROXY
-    - echo $http_proxy
-    - echo $https_proxy
-    - GIT_SSH_COMMAND="ssh -i $(realpath .ssh/deploy)" git push -u github my_test_branch
