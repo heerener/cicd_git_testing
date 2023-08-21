@@ -49,21 +49,21 @@ def commit_and_push(branch_name):
 
 
 def pull_request(branch_name):
-    url = "https://github.com"
+    url = "https://github.com/repos/heerener/cicd_git_testing"
     session = requests.Session()
     session.headers = {
-        "Authorization": f"Bearer {os.environ['GITHUB_ACCESS_TOKEN']}",
+        "Authorization": f"token {os.environ['GITHUB_ACCESS_TOKEN']}",
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
     }
 
     print("Getting pull requests")
-    pulls = session.get(f"{url}/repos/heerener/cicd_git_testing/pulls")
+    pulls = session.get(f"{url}/pulls")
     print(pulls)
     if not pulls:
         print("No pull requests - let's make one")
         response = session.post(
-            f"{url}/repos/heerener/cicd_git_testing/pulls",
+            f"{url}/pulls",
             data=json.dumps(
                 {
                     "title": "New releases",
