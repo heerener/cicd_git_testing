@@ -8,7 +8,7 @@ git action:
     - pip install gitpython
     - mkdir -p .ssh
     - echo $GITHUB_DEPLOY_KEY | base64 -d > .ssh/deploy
-    - python repo_actions.py || true
+    - python repo_actions.py
     - ls
     - git status
     - git remote -v
