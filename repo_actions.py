@@ -68,7 +68,7 @@ def pull_request(branch_name):
                 {
                     "title": "New releases",
                     "body": "Bumper found new releases, here are the spack version bumps",
-                    "head": "branch_name",
+                    "head": branch_name,
                     "base": "main",
                 }
             ),
