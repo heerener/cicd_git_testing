@@ -62,17 +62,13 @@ def pull_request(branch_name):
     print(pulls)
     if not pulls:
         print("No pull requests - let's make one")
-        response = session.post(
-            f"{url}/pulls",
-            data=json.dumps(
-                {
-                    "title": "New releases",
-                    "body": "Bumper found new releases, here are the spack version bumps",
-                    "head": branch_name,
-                    "base": "main",
-                }
-            ),
-        )
+        data = {
+            "title": "New releases",
+            "body": "Bumper found new releases, here are the spack version bumps",
+            "head": branch_name,
+            "base": "initial-setup",
+        }
+        response = session.post(f"{url}/pulls", data=json.dumps(data))
 
         print("Pull request made")
         print(response)
@@ -83,7 +79,7 @@ def pull_request(branch_name):
 def main():
     branch_name = "my_test_branch"
     write_file()
-    commit_and_push(branch_name)
+    # commit_and_push(branch_name)
     pull_request(branch_name)
 
 
