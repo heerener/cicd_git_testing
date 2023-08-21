@@ -8,7 +8,7 @@ from git import Actor, Repo
 
 def write_file():
     with open("modification.txt", "w") as fp:
-        fp.write(str(uuid4))
+        fp.write(str(uuid4()))
 
 
 def commit_and_push(branch_name):
@@ -72,7 +72,7 @@ def pull_request(branch_name):
 
 def main():
     branch_name = "my_test_branch"
-    write_file(branch_name)
+    write_file()
     commit_and_push(branch_name)
 
 
