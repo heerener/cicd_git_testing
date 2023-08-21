@@ -3,6 +3,7 @@ import json
 import os
 from uuid import uuid4
 
+import requests
 from git import Actor, Repo
 
 
@@ -64,10 +65,14 @@ def pull_request(branch_name):
         response = requests.post(
             f"{url}/repos/heerener/cicd_git_testing/pulls",
             headers=headers,
-            data=json.dump({"title": "New releases",
-                            "body": "Bumper found new releases, here are the spack version bumps",
-                            "head": "branch_name",
-                            "base": "main"}),
+            data=json.dump(
+                {
+                    "title": "New releases",
+                    "body": "Bumper found new releases, here are the spack version bumps",
+                    "head": "branch_name",
+                    "base": "main",
+                }
+            ),
         )
 
         print("Pull request made")
