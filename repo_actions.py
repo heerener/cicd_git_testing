@@ -55,12 +55,14 @@ def pull_request(branch_name):
         "Accept": "application/vnd.github+json",
     }
 
+    print("Getting pull requests")
     pulls = requests.get(
         f"{url}/repos/heerener/cicd_git_testing/pulls", headers=headers
     )
     print(pulls)
     if not pulls:
-        requests.post(
+        print("No pull requests - let's make one")
+        response = requests.post(
             f"{url}/repos/heerener/cicd_git_testing/pulls",
             headers=headers,
             data=json.dump({"title": "New releases",
@@ -68,6 +70,11 @@ def pull_request(branch_name):
                             "head": "branch_name",
                             "base": "main"}),
         )
+
+        print("Pull request made")
+        print(response)
+        print(response.content)
+        print(response.json())
 
 
 def main():
