@@ -7,4 +7,5 @@ git action:
     - GIT_SSH_COMMAND="ssh -i $(realpath .ssh/deploy)" python repo_actions.py || true
     - ls
     - git status
+    - git remote -v
     - GIT_SSH_COMMAND="ssh -i $(realpath .ssh/deploy)" git push -u github my_test_branch
