@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import json
 import os
 from uuid import uuid4
 
@@ -10,14 +11,14 @@ def write_file():
         fp.write(str(uuid4))
 
 
-def commit_and_push():
+def commit_and_push(branch_name):
     repo = Repo(".")
     print("Adding remote")
     remote = repo.create_remote(
-        "github", "https://heerener:${GITHUB_ACCESS_TOKEN}@github.com/heerener/cicd_git_testing"
+        "github",
+        "https://heerener:${GITHUB_ACCESS_TOKEN}@github.com/heerener/cicd_git_testing",
     )
     print("Remote github added")
-    branch_name = "my_test_branch"
 
     existing_branches = [ref.name for ref in remote.refs]
     remote_ref_name = f"{remote.name}/{branch_name}"
@@ -47,9 +48,32 @@ def commit_and_push():
     print(f"Result: {result.summary}")
 
 
+def pull_request(branch_name):
+    url = "https://github.com"
+    headers = {
+        "Authorization": f"Bearer {os.environ['GITHUB_ACCESS_TOKEN']}",
+        "Accept": "application/vnd.github+json",
+    }
+
+    pulls = requests.get(
+        f"{url}/repos/heerener/cicd_git_testing/pulls", headers=headers
+    )
+    print(pulls)
+    if not pulls:
+        requests.post(
+            f"{url}/repos/heerener/cicd_git_testing/pulls",
+            headers=headers,
+            data=json.dump({"title": "New releases",
+                            "body": "Bumper found new releases, here are the spack version bumps",
+                            "head": "branch_name",
+                            "base": "main"}),
+        )
+
+
 def main():
-    write_file()
-    commit_and_push()
+    branch_name = "my_test_branch"
+    write_file(branch_name)
+    commit_and_push(branch_name)
 
 
 if __name__ == "__main__":
