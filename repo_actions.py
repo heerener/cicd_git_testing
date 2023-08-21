@@ -49,7 +49,7 @@ def commit_and_push(branch_name):
 
 
 def pull_request(branch_name):
-    url = "https://github.com/repos/heerener/cicd_git_testing"
+    url = "https://api.github.com/repos/heerener/cicd_git_testing"
     session = requests.Session()
     session.headers = {
         "Authorization": f"token {os.environ['GITHUB_ACCESS_TOKEN']}",
@@ -58,28 +58,30 @@ def pull_request(branch_name):
     }
 
     print("Getting pull requests")
-    pulls = session.get(f"{url}/pulls")
+    pulls = session.get(f"{url}/pulls?base=initial-setup&head={branch_name}").json()
     print(pulls)
     if not pulls:
-        print("No pull requests - let's make one")
+        print("PR doesn't exist yet - filing")
         data = {
             "title": "New releases",
             "body": "Bumper found new releases, here are the spack version bumps",
-            "head": branch_name,
+            "head": f"{branch_name}",
             "base": "initial-setup",
         }
-        response = session.post(f"{url}/pulls", data=json.dumps(data))
+        response = session.post(f"{url}/pulls", json=data)
 
         print("Pull request made")
         print(response)
         print(response.content)
-        print(response.json())
+        response.raise_for_status()
+    else:
+        print("Pull request exists already: {pulls[0]['_links']['self']['href']}")
 
 
 def main():
     branch_name = "my_test_branch"
     write_file()
-    # commit_and_push(branch_name)
+    commit_and_push(branch_name)
     pull_request(branch_name)
 
 
