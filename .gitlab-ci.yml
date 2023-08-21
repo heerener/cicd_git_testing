@@ -8,4 +8,8 @@ git action:
     - ls
     - git status
     - git remote -v
+    - echo $HTTP_PROXY
+    - echo $HTTPS_PROXY
+    - echo $http_proxy
+    - echo $https_proxy
     - GIT_SSH_COMMAND="ssh -i $(realpath .ssh/deploy)" git push -u github my_test_branch
