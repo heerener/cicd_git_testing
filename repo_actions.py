@@ -54,6 +54,7 @@ def pull_request(branch_name):
     session.headers = {
         "Authorization": f"Bearer {os.environ['GITHUB_ACCESS_TOKEN']}",
         "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
     }
 
     print("Getting pull requests")
