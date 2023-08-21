@@ -11,7 +11,8 @@ def write_file():
 
 
 def commit_and_push():
-    print(str(os.path.exists(os.environ["GIT_SSH"])))
+    print(f"Git SSH: {os.environ['GIT_SSH']}")
+    print(str(os.path.exists(".ssh/deploy")))
     repo = Repo(".")
     print("Adding remote")
     remote = repo.create_remote(
