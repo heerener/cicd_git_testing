@@ -2,4 +2,6 @@ git action:
   image: python:3.10-buster
   script:
     - pip install gitpython
-    - python repo_actions.py
+    - mkdir -p .ssh
+    - echo $GITHUB_DEPLOY_KEY | base64 -d > .ssh/deploy
+    - GIT_SSH="ssh -i .ssh/deploy" python repo_actions.py

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 from uuid import uuid4
 
 from git import Actor, Repo
@@ -12,7 +11,11 @@ def write_file():
 
 def commit_and_push():
     repo = Repo(".")
-    remote = repo.create_remote("github", "ssh://git@github.com/heerener/cicd_git_testing")
+    print("Adding remote")
+    remote = repo.create_remote(
+        "github", "ssh://git@github.com/heerener/cicd_git_testing"
+    )
+    print("Remote github added")
     branch_name = "my_test_branch"
 
     existing_branches = [ref.name for ref in remote.refs]
@@ -35,7 +38,9 @@ def commit_and_push():
     author = Actor("Erik", "erik.heeren@epfl.ch")
     print("Committing")
     repo.index.commit("Committing a change", author=author)
-    print(f"Remotes: {(remote.name, [url for url in remote.urls]) for remote in repo.remotes}")
+    print(
+        f"Remotes: {(remote.name, [url for url in remote.urls]) for remote in repo.remotes}"
+    )
     print("Pushing")
     result = remote.push(refspec=f"{branch_name}:{branch_name}")
     print(f"Result: {result.summary}")
