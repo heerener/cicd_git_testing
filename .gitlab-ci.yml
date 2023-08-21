@@ -6,4 +6,4 @@ git action:
     - mkdir -p .ssh
     - echo $GITHUB_DEPLOY_KEY | base64 -d > .ssh/deploy
     - ls -lh .ssh
-    - GIT_SSH="ssh -i .ssh/deploy" python repo_actions.py
+    - GIT_SSH="ssh -i $(realpath .ssh/deploy)" python repo_actions.py
