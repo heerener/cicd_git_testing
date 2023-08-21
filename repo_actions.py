@@ -80,6 +80,7 @@ def main():
     branch_name = "my_test_branch"
     write_file()
     commit_and_push(branch_name)
+    pull_request(branch_name)
 
 
 if __name__ == "__main__":
