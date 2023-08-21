@@ -14,7 +14,7 @@ def commit_and_push():
     repo = Repo(".")
     print("Adding remote")
     remote = repo.create_remote(
-        "github", "ssh://git@github.com/heerener/cicd_git_testing"
+        "github", "https://heerener:${GITHUB_ACCESS_TOKE}@github.com/heerener/cicd_git_testing"
     )
     print("Remote github added")
     branch_name = "my_test_branch"
