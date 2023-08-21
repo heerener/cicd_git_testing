@@ -65,7 +65,7 @@ def pull_request(branch_name):
         response = requests.post(
             f"{url}/repos/heerener/cicd_git_testing/pulls",
             headers=headers,
-            data=json.dump(
+            data=json.dumps(
                 {
                     "title": "New releases",
                     "body": "Bumper found new releases, here are the spack version bumps",
