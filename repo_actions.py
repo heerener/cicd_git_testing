@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 from uuid import uuid4
 
 from git import Actor, Repo
@@ -10,6 +11,7 @@ def write_file():
 
 
 def commit_and_push():
+    print(str(os.path.exists(os.environ["GIT_SSH"])))
     repo = Repo(".")
     print("Adding remote")
     remote = repo.create_remote(
