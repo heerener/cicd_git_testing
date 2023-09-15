@@ -1,8 +1,18 @@
 workflow:
   rules:
+    - if: '$CI_EXTERNAL_PULL_REQUEST_IID'
+    # Add a comment here
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: $CI_PIPELINE_SOURCE == "web"
 
+mini job:
+  script:
+    - echo "Hello world"
+
+
 git action:
+  rules:
+    - when: never
   image: python:3.10-buster
   script:
     - pip install gitpython requests
