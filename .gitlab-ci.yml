@@ -4,10 +4,13 @@ workflow:
     # Add a comment here
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
     - if: $CI_PIPELINE_SOURCE == "web"
+    - if: '$CI_COMMIT_TAG'
 
 mini job:
   script:
     - echo "Hello world"
+    - echo "CI_COMMIT_BRANCH is .$CI_COMMIT_BRANCH."
+    - echo "CI_COMMIT_TAG is .$CI_COMMIT_TAG."
 
 
 git action:
