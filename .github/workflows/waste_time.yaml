@@ -8,7 +8,7 @@ on:
 jobs:
   mootrix:
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} - ${{ matrix.config.moo }}
+    name: Mootrix ${{ matrix.os }} - ${{ matrix.config.moo }}
     strategy:
       matrix:
         os: [ macOS-11, ubuntu-latest ]
@@ -32,3 +32,30 @@ jobs:
           echo "This thing always happens"
           sleep 5
           echo "And has now been concluded"
+
+  meowtrix:
+    runs-on: ${{ matrix.os }}
+    name: Meowtrix ${{ matrix.os }} - ${{ matrix.config.moo }}
+    if: ${{ github.event.pull_request.draft == true }}
+    strategy:
+      matrix:
+        os: [ macOS-11, ubuntu-latest ]
+        config:
+          - {"moo": "boo"}
+          - {"moo": "blergh"}
+        include:
+          - os: ubuntu-20.04
+            config:
+              moo: "herpaderp"
+
+    steps:
+      - name: First step
+        run: |
+          echo "Doing the thing"
+          sleep 5
+          echo "The thing is done"
+      - name: Second step
+        run: |
+          echo "Doing the other thing"
+          sleep 5
+          echo "The other thing is also done"
