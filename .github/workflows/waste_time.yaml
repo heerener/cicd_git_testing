@@ -36,7 +36,7 @@ jobs:
   meowtrix:
     runs-on: ${{ matrix.os }}
     name: Meowtrix ${{ matrix.os }} - ${{ matrix.config.moo }}
-    if: ${{ github.event.pull_request.draft == false }}
+    if: '${{ ! github.event.pull_request.draft }}'
     strategy:
       matrix:
         os: [ macOS-11, ubuntu-latest ]
