@@ -3,17 +3,32 @@ on:
     types: [opened, edited, synchronize, reopened]
 
 
+# For Draft PRs, we only want the herpaderp job
+# For Non-Draft PRs, we want all the jobs
 jobs:
-  waste-time:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
+  mootrix:
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} - ${{ matrix.config.moo }}
+    strategy:
+      matrix:
+        os: [ macOS-11, ubuntu-latest ]
+        config:
+          - {"moo": "boo"}
+          - {"moo": "blergh"}
+        include:
+          - os: ubuntu-20.04
+            config:
+              moo: "herpaderp"
+
     steps:
-      - name: Sleeping Beauty
+      - name: ${{ matrix.config.moo }}: only herpaderp on draft
+        if: github.event.pull_request.draft == true && ${{ matrix.config.moo }} == "herpaderp"
         run: |
-          sleep 60
-  do-stuff:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Echo something
+          echo "Doing the thing"
+          sleep 5
+          echo "The thing is done"
+      - name: Always run
         run: |
-          echo "Hello"
+          echo "This thing always happens"
+          sleep 5
+          echo "And has now been concluded"
