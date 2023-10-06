@@ -21,10 +21,16 @@ jobs:
               moo: "herpaderp"
 
     steps:
-      - name: ${{ matrix.config.moo }} only herpaderp on draft
+      - name: ${{ matrix.config.moo }} should only run for herpaderp on draft
         if: github.event.pull_request.draft == true && ${{ matrix.config.moo }} == "herpaderp"
         run: |
           echo "Doing the thing"
+          echo Draft is ${{ github.event.pull_request.draft }}
+          echo $(${{ github.event.pull_request.draft }} == true)
+          echo Moo is ${{ matrix.config.moo }}
+          echo $(${{ matrix.config.moo }} == "herpaderp")
+          echo Comparison is $(${{ github.event.pull_request.draft }} == true && ${{ matrix.config.moo }} == "herpaderp")
+
           sleep 5
           echo "The thing is done"
       - name: Always run
