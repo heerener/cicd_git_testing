@@ -3,8 +3,8 @@ on:
     types: [opened, edited, synchronize, reopened]
 
 
-# For Draft PRs, we only want the herpaderp job
-# For Non-Draft PRs, we want all the jobs
+# For Draft PRs, we only want the herpaderp step 1
+# For Non-Draft PRs, we want all the steps
 jobs:
   mootrix:
     runs-on: ${{ matrix.os }}
@@ -25,12 +25,6 @@ jobs:
         if: ${{ github.event.pull_request.draft == true && matrix.config.moo == 'herpaderp' }}
         run: |
           echo "Doing the thing"
-          echo Draft is ${{ github.event.pull_request.draft }}
-          echo $([ ${{ github.event.pull_request.draft }} == true ])
-          echo Moo is ${{ matrix.config.moo }}
-          echo $([ ${{ matrix.config.moo }} == "herpaderp" ])
-          echo Comparison is $([ ${{ github.event.pull_request.draft }} == true && ${{ matrix.config.moo }} == "herpaderp" ])
-
           sleep 5
           echo "The thing is done"
       - name: Always run
