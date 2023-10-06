@@ -26,10 +26,10 @@ jobs:
         run: |
           echo "Doing the thing"
           echo Draft is ${{ github.event.pull_request.draft }}
-          echo $(${{ github.event.pull_request.draft }} == true)
+          echo $([ ${{ github.event.pull_request.draft }} == true ])
           echo Moo is ${{ matrix.config.moo }}
-          echo $(${{ matrix.config.moo }} == "herpaderp")
-          echo Comparison is $(${{ github.event.pull_request.draft }} == true && ${{ matrix.config.moo }} == "herpaderp")
+          echo $([ ${{ matrix.config.moo }} == "herpaderp" ])
+          echo Comparison is $([ ${{ github.event.pull_request.draft }} == true && ${{ matrix.config.moo }} == "herpaderp" ])
 
           sleep 5
           echo "The thing is done"
