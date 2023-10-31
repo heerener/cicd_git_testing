@@ -10,6 +10,7 @@ tag-only job:
   script:
     - echo "Tag creation"
     - echo "CI_COMMIT_TAG is .$CI_COMMIT_TAG."
+    - echo "CI_PIPELINE_SOURCE is .$CI_PIPELINE_SOURCE."
   rules:
     - if: '$CI_COMMIT_TAG'
 
