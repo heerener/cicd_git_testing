@@ -7,7 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup Docker
-        uses: docker-practice/actions-setup-docker@heerener/increase-timeout
+        uses: heerener/actions-setup-docker@increase-timeout
+          # uses: docker-practice/actions-setup-docker@master
       - name: Build container
         env:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
