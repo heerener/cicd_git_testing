@@ -1,3 +1,6 @@
+on:
+  push:
+    branches: [issue]
 jobs:
   build docker container:
     runs-on: macOS-12
