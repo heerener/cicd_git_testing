@@ -5,6 +5,10 @@ jobs:
   build_docker_container:
     runs-on: macOS-12
     steps:
+      - name: Debug info
+        run: |
+          pwd
+          find . -name Dockerfile
       - name: Setup Docker
         uses: docker-practice/actions-setup-docker@master
       - name: Build container
