@@ -1,0 +1,13 @@
+jobs:
+  build docker container:
+    runs-on: macOS-12
+    steps:
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@master
+      - name: Build container
+        env:
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: |
+          docker login -u heerener -p ${DOCKER_HUB_TOKEN}
+          docker build -t heerener/singularitah:0.1 -f Dockerfile .
+          docker push heerener/singularitah:0.1
