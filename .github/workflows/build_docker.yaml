@@ -2,7 +2,7 @@ on:
   push:
     branches: [issue]
 jobs:
-  build docker container:
+  build_docker_container:
     runs-on: macOS-12
     steps:
       - name: Setup Docker
