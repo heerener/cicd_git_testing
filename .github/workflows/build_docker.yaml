@@ -9,6 +9,8 @@ jobs:
         run: |
           pwd
           find . -name Dockerfile
+          ls
+          GIT_PAGER=cat git branch
       - name: Setup Docker
         uses: docker-practice/actions-setup-docker@master
       - name: Build container
