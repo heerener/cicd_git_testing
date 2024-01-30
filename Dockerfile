@@ -4,6 +4,9 @@ FROM alpine:3.18
 ARG SINGULARITY_VERSION
 ARG S3CMD_VERSION
 
+RUN echo "Singularity version ${SINGULARITY_VERSION}"
+RUN echo "s3cmd version ${S3CMD_VERSION}"
+
 RUN apk add bash linux-headers libseccomp-dev glib-dev fuse3-dev libc-dev gcc make autoconf automake libtool squashfs-tools go wget py3-dateutil
 RUN wget https://github.com/sylabs/singularity/releases/download/v${SINGULARITY_VERSION}/singularity-ce-${SINGULARITY_VERSION}.tar.gz
 RUN tar xf singularity-ce-${SINGULARITY_VERSION}.tar.gz

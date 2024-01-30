@@ -15,6 +15,8 @@ jobs:
           SINGULARITY_VERSION: 2.4.0
           S3CMD_VERSION: 2.2.0
         run: |
+          echo "Singularity version is ${SINGULARITY_VERSION}"
+          echo "s3cmd version is ${S3CMD_VERSION}"
           docker login -u heerener -p ${DOCKER_HUB_TOKEN}
           docker build -t heerener/singularitah:0.1 -f Dockerfile --build-arg="S3CMD_VERSION=${S3CMD_VERSION}" --build-arg="$SINGULARITY_VERSION=${SINGULARITY_VERSION}" .
           docker push heerener/singularitah:0.1
