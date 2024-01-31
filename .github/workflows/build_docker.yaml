@@ -19,5 +19,5 @@ jobs:
           echo "Singularity version is ${SINGULARITY_VERSION}"
           echo "s3cmd version is ${S3CMD_VERSION}"
           podman login -u heerener -p ${DOCKER_HUB_TOKEN}
-          podman build -t heerener/singularitah:0.1 --build-arg "$SINGULARITY_VERSION=${SINGULARITY_VERSION}" --build-arg "S3CMD_VERSION=${S3CMD_VERSION}" -f Dockerfile .
+          podman build -t heerener/singularitah:0.1 --build-arg "S3CMD_VERSION=${S3CMD_VERSION}" --build-arg "$SINGULARITY_VERSION=${SINGULARITY_VERSION}" -f Dockerfile .
           podman push heerener/singularitah:0.1
