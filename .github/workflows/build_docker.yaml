@@ -3,12 +3,13 @@ on:
     branches: [issue]
 jobs:
   build_docker_container:
-    runs-on: macOS-12
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Docker
-        uses: heerener/actions-setup-docker@increase-timeout
-          # uses: docker-practice/actions-setup-docker@master
+      - name: Setup Podman
+        run: |
+          apt-get update
+          apt-get install -y podman
       - name: Build container
         env:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
@@ -17,6 +18,6 @@ jobs:
         run: |
           echo "Singularity version is ${SINGULARITY_VERSION}"
           echo "s3cmd version is ${S3CMD_VERSION}"
-          docker login -u heerener -p ${DOCKER_HUB_TOKEN}
-          docker build -t heerener/singularitah:0.1 --build-arg "$SINGULARITY_VERSION=${SINGULARITY_VERSION}" --build-arg "S3CMD_VERSION=${S3CMD_VERSION}" -f Dockerfile .
-          docker push heerener/singularitah:0.1
+          podman login -u heerener -p ${DOCKER_HUB_TOKEN}
+          podman build -t heerener/singularitah:0.1 --build-arg "$SINGULARITY_VERSION=${SINGULARITY_VERSION}" --build-arg "S3CMD_VERSION=${S3CMD_VERSION}" -f Dockerfile .
+          podman push heerener/singularitah:0.1
