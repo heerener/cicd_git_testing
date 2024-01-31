@@ -13,7 +13,7 @@ jobs:
       - name: Build container
         env:
           DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-          SINGULARITY_VERSION: 2.4.0
+          SINGULARITY_VERSION: 4.1.0
           S3CMD_VERSION: 2.2.0
         run: |
           echo "Singularity version is ${SINGULARITY_VERSION}"
