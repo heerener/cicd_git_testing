@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [issue]
+    branches: [docker]
 jobs:
   build_docker_container:
     runs-on: ubuntu-22.04
