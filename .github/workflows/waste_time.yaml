@@ -25,11 +25,13 @@ jobs:
         if: ${{ github.event.pull_request.draft == true && matrix.config.moo == 'herpaderp' }}
         run: |
           echo "Doing the thing"
+          echo "Thing" > blub
           sleep 5
           echo "The thing is done"
       - name: Always run
         run: |
           echo "This thing always happens"
+          cat blub
           sleep 5
           echo "And has now been concluded"
 
