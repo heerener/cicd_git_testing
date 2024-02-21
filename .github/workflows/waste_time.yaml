@@ -31,7 +31,7 @@ jobs:
       - name: Always run
         run: |
           echo "This thing always happens"
-          cat blub
+          if [ -f blub ]; then cat blub; else echo "No blub"; fi
           sleep 5
           echo "And has now been concluded"
 
@@ -60,6 +60,6 @@ jobs:
       - name: Second step
         run: |
           echo "Doing the other thing"
-          cat blub
+          if [ -f blub ]; then cat blub; else echo "No blub"; fi
           sleep 5
           echo "The other thing is also done"
