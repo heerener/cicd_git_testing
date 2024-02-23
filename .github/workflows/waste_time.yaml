@@ -16,6 +16,15 @@ concurrency:
 # For Draft PRs, we only want the herpaderp step 1
 # For Non-Draft PRs, we want all the steps
 jobs:
+  show-variables:
+    name: "Show variables"
+    steps:
+      - name: "The actual showing of variables"
+        run: |
+          echo Workflow is .${{ github.workflow }}.
+          echo Ref is .${{ github.ref }}.
+          echo Run ID is .${{ github.run_id }}.
+          echo PR number is .${{ github.event.pull_request_number }}
   mootrix:
     runs-on: ${{ matrix.os }}
     name: Mootrix ${{ matrix.os }} - ${{ matrix.config.moo }}
