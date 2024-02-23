@@ -9,7 +9,7 @@ on:
 
 concurrency:
   # Don't cancel on main
-  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.event.pull_request_number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.event.number || github.ref }}
   cancel-in-progress: true
 
 
@@ -25,7 +25,7 @@ jobs:
           echo Workflow is .${{ github.workflow }}.
           echo Ref is .${{ github.ref }}.
           echo Run ID is .${{ github.run_id }}.
-          echo PR number is .${{ github.event.pull_request_number }}
+          echo PR number is .${{ github.event.number }}
   mootrix:
     runs-on: ${{ matrix.os }}
     name: Mootrix ${{ matrix.os }} - ${{ matrix.config.moo }}
