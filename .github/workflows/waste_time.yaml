@@ -26,7 +26,7 @@ jobs:
           echo Ref is .${{ github.ref }}.
           echo Run ID is .${{ github.run_id }}.
           echo PR number is .${{ github.event.number }}.
-          echo Group boils down to .${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.ref }}.
+          echo Group boils down to .${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.ref }}..
   mootrix:
     runs-on: ${{ matrix.os }}
     name: Mootrix ${{ matrix.os }} - ${{ matrix.config.moo }}
