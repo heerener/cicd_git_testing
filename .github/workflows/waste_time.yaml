@@ -17,6 +17,7 @@ concurrency:
 # For Non-Draft PRs, we want all the steps
 jobs:
   show-variables:
+    runs-on: ubuntu-latest
     name: "Show variables"
     steps:
       - name: "The actual showing of variables"
