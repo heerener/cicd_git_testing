@@ -20,3 +20,16 @@ jobs:
           ls /opt
           ls /opt/spack/*
           echo "All done"
+      - name: Write to file
+        run: |-
+          echo "Hello world" > /tmp/output.log
+          pwd >> /tmp/output.log
+          ls >> /tmp/output.log
+          ls /opt >> /tmp/output.log
+          ls /opt/spack/* >> /tmp/output.log
+          echo "All done" >> /tmp/output.log
+      - name: Archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-log
+          path: /tmp/output.log
