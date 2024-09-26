@@ -7,7 +7,7 @@ on:
 jobs:
   some-output:
     runs-on:
-      - codebuild-spacktainers-${{ github.run_id }}-${{ github.run_attempt }}
+      - codebuild-personal-repo-test-${{ github.run_id }}-${{ github.run_attempt }}
     name: Quick test with some output
     steps:
       - name: Checkout repo
