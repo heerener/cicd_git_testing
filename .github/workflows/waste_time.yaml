@@ -19,7 +19,7 @@ jobs:
           ls
           ls /opt
           ls /opt/spack/*
-          echo "All done"
+          echo "All done. Really"
       - name: Write to file
         run: |-
           echo "Hello world" > /tmp/output.log
