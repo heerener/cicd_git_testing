@@ -1,82 +1,22 @@
+---
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened]
   push:
-    branches:
-      - main
-      - ci/**
-
-
-concurrency:
-  # Don't cancel on main, creating a PR when a push workflow is already going will cancel the push workflow in favour of the PR workflow
-  group: ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.event.number && github.head_ref || github.ref_name }}
-  cancel-in-progress: true
-
-
-# For Draft PRs, we only want the herpaderp step 1
-# For Non-Draft PRs, we want all the steps
+    branches: [main, ci/**]
 jobs:
-  show-variables:
-    runs-on: ubuntu-latest
-    name: "Show variables"
+  some-output:
+    runs-on:
+      - codebuild-spacktainers-${{ github.run_id }}-${{ github.run_attempt }}
+    name: Quick test with some output
     steps:
-      - name: "The actual showing of variables"
-        run: |
-          echo Workflow is .${{ github.workflow }}.
-          echo Ref is .${{ github.ref }}.
-          echo Run ID is .${{ github.run_id }}.
-          echo PR number is .${{ github.event.number }}.
-          echo Group boils down to ${{ github.workflow }}-${{ github.ref == 'refs/heads/main' && github.run_id || github.event.number && github.head_ref || github.ref_name }}
-  mootrix:
-    runs-on: ${{ matrix.os }}
-    name: Mootrix ${{ matrix.os }} - ${{ matrix.config.moo }}
-    strategy:
-      matrix:
-        os: [ macOS-11, ubuntu-latest ]
-        config:
-          - {"moo": "boo"}
-          - {"moo": "blergh"}
-        include:
-          - os: ubuntu-20.04
-            config:
-              moo: "herpaderp"
-
-    steps:
-      - name: ${{ matrix.config.moo }} should only run for herpaderp on draft
-        if: ${{ github.event.pull_request.draft == true && matrix.config.moo == 'herpaderp' }}
-        run: |
-          echo "Doing the thing"
-          sleep 20
-          echo "The thing is done"
-      - name: Always run
-        run: |
-          echo "This thing always happens"
-          sleep 20
-          echo "And has now been concluded"
-
-  meowtrix:
-    runs-on: ${{ matrix.os }}
-    name: Meowtrix ${{ matrix.os }} - ${{ matrix.config.moo }}
-    if: '${{ ! github.event.pull_request.draft }}'
-    strategy:
-      matrix:
-        os: [ macOS-11, ubuntu-latest ]
-        config:
-          - {"moo": "boo"}
-          - {"moo": "blergh"}
-        include:
-          - os: ubuntu-20.04
-            config:
-              moo: "herpaderp"
-
-    steps:
-      - name: First step
-        run: |
-          echo "Doing the thing"
-          sleep 20
-          echo "The thing is done"
-      - name: Second step
-        run: |
-          echo "Doing the other thing"
-          sleep 20
-          echo "The other thing is also done"
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Do something
+        run: |-
+          echo "Hello world"
+          pwd
+          ls
+          ls /opt
+          ls /opt/spack/*
+          echo "All done"
