@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     name: "Show variables"
     steps:
+      - name: install python
+        run: |
+          apt-get update
+          apt-get install -y python3
       - name: python version
         run: |
           python3 --version
