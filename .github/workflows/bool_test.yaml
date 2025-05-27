@@ -1,0 +1,33 @@
+---
+name: test boolean input
+on:
+  workflow_dispatch:
+    inputs:
+      do_something:
+        description: bool test variable
+        type: boolean
+        required: true
+        default: false
+jobs:
+  do-the-thing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: bool test
+        run: |-
+          set -x
+          echo ${{ inputs.do_something }}
+          echo "First check"
+          if [[ ${{ inputs.do_something}} == true ]]
+          then
+            echo "Truth!"
+          else
+            echo "False"
+          fi
+          echo "Second check"
+          if [[ ${{ inputs.do_something}} == false ]]
+          then
+            echo "False"
+          else
+            echo "Truth!"
+          fi
+          echo "All done"
