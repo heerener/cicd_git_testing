@@ -8,10 +8,19 @@ on:
         type: boolean
         required: true
         default: false
+      from_vars:
+        description: default value from vars
+        default: ${{ vars.SOMETHING }}
+        required: true
+        type: string
 jobs:
   do-the-thing:
     runs-on: ubuntu-latest
     steps:
+      - name: from_vars test
+        run: |-
+          set -x
+          echo ${{ inputs.from_vars }}
       - name: bool test
         run: |-
           set -x
